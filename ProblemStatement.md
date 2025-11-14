@@ -1,0 +1,1 @@
+The existing hospital monitoring systems require manual checking of vitals, leading to delays in detecting critical patient conditions. A real-time automated system is needed to continuously track health parameters and alert staff immediately when abnormalities are detected.
