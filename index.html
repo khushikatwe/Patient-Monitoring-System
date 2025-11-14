@@ -1,85 +1,175 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- FIX 1: Correct base path -->
-    <base href="/Patient-Monitoring-System/">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Patient Monitoring System</title>
 
-    <meta charset="utf-8" />
-    <noscript>
-      <style>
-        #container {
-          display: none;
-        }
-      </style>
-    </noscript>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+    }
 
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="color-scheme" content="light dark" />
+    /* SIDEBAR */
+    .sidebar {
+      width: 240px;
+      height: 100vh;
+      background: #0c4a6e;
+      color: white;
+      position: fixed;
+      padding: 20px;
+    }
+    .sidebar h2 {
+      margin-top: 0;
+    }
+    .menu-item {
+      margin: 18px 0;
+      cursor: pointer;
+      opacity: 0.9;
+    }
+    .menu-item:hover {
+      opacity: 1;
+    }
 
-    <!-- FIX 2: Removed leading "/" from all paths -->
-    <link rel="preload" href="_runtimes/sites-runtime.2d11bd0269df481a9b85ffc660d175ce678b34d09f89c45331e050c6735383f5.js" as="script" crossorigin />
-    <link rel="preload" href="_components/v2/78a4bfe7311801464815b44a88c6b976c8f907f0.js" as="script" crossorigin />
-    <link rel="preload" href="_json/b85b594b-29c1-4965-ab4c-32f385c843e4/_index.json" as="fetch" />
+    /* CONTENT */
+    .content {
+      margin-left: 260px;
+      padding: 30px;
+    }
 
-    <style id="reset-css">
-      /* keeping your original figma CSS */
-    </style>
+    .title {
+      font-size: 28px;
+      font-weight: bold;
+      color: #0c4a6e;
+    }
 
-    <style id="font-faces-0"></style>
-    <style id="body-background-color">body:has([data-breakpoint-id="node-0_4"]) { background-color: #FFF }</style>
-    <style id="ssr-css"></style>
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
 
-    <script>
-      window.__serverRenderedCSSClassNames = {};
-    </script>
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 14px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
 
-    <meta name="description" content="Created with Figma">
-    <meta name="robots" content="noindex">
+    .card h3 {
+      margin: 0;
+      color: #0c4a6e;
+      font-size: 20px;
+    }
 
-    <title>Patient Monitoring System</title>
+    .value {
+      font-size: 32px;
+      font-weight: bold;
+      margin-top: 12px;
+    }
 
-    <!-- FIXED CSS PATH -->
-    <link rel="stylesheet" href="_components/v2/78a4bfe7311801464815b44a88c6b976c8f907f0.css">
-  </head>
+    .status {
+      margin-top: 8px;
+      font-size: 14px;
+    }
 
-  <body>
-    <script data-template-id="country-code">
-      window.__cf_country = "IN"
-    </script>
+    .good {
+      color: #16a34a;
+    }
+    .warn {
+      color: #eab308;
+    }
+    .danger {
+      color: #dc2626;
+    }
 
-    <!-- FIXED: Removed leading "/" in import path -->
-    <script type="module">
-      import { SitesRuntime } from '_runtimes/sites-runtime.2d11bd0269df481a9b85ffc660d175ce678b34d09f89c45331e050c6735383f5.js';
+  </style>
+</head>
 
-      const sitesRuntime = new SitesRuntime({
-        container: document.getElementById('container'),
-        env: 'published',
-        bundleId: 'b85b594b-29c1-4965-ab4c-32f385c843e4',
-        loadComponentsOverNetwork: true,
-        assetsVersion: 'v11',
-        fontsVersion: 'v1',
-        videosVersion: 'v1',
-        codeComponentsVersion: 'v2',
-        wasServerRendered: true,
-        withBaseStyles: false,
-        reportingDomain: "https://www.figma.com",
-        bundleCreationDate: '2025-10-27 14:56:00 UTC',
-        isFigmake: true,
-      });
-    </script>
+<body>
 
-    <div id="container">
-      <div class="tailwind css-myl2ny css-exq74d css-gs60ek"></div>
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <h2>🩺 PMS Dashboard</h2>
+
+    <div class="menu-item">Dashboard</div>
+    <div class="menu-item">Patients</div>
+    <div class="menu-item">Reports</div>
+    <div class="menu-item">Settings</div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="content">
+    <div class="title">Real-time Patient Vitals</div>
+
+    <div class="cards">
+
+      <!-- Heart Rate -->
+      <div class="card">
+        <h3>Heart Rate</h3>
+        <div class="value" id="hrValue">-- bpm</div>
+        <div class="status" id="hrStatus">Loading...</div>
+      </div>
+
+      <!-- Blood Oxygen -->
+      <div class="card">
+        <h3>SpO₂</h3>
+        <div class="value" id="spoValue">-- %</div>
+        <div class="status" id="spoStatus">Loading...</div>
+      </div>
+
+      <!-- Body Temperature -->
+      <div class="card">
+        <h3>Temperature</h3>
+        <div class="value" id="tempValue">-- °C</div>
+        <div class="status" id="tempStatus">Loading...</div>
+      </div>
+
+      <!-- Blood Pressure -->
+      <div class="card">
+        <h3>Blood Pressure</h3>
+        <div class="value" id="bpValue">--/--</div>
+        <div class="status" id="bpStatus">Loading...</div>
+      </div>
+
     </div>
+  </div>
 
-    <noscript>
-      <main style="height: 100vh; width: 100vw; background-color: white; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
-        <h1 style="font-size: 24px; padding: 8px; color: black">This site requires JavaScript</h1>
-        <p style="font-size: 16px; padding: 8px; color: #00000080">Enable JavaScript and reload.</p>
-        <form style="margin-top: 12px;" action="">
-          <button type="submit" style="font-size: 14px; color: black; border: 1px solid #0000001a; border-radius: 5px; width: 256px; height: 32px;">Reload page</button>
-        </form>
-      </main>
-    </noscript>
-  </body>
+  <script>
+    // Fake live data updater (simulates sensor readings)
+    function updateVitals() {
+
+      let hr = Math.floor(Math.random() * (110 - 55) + 55);
+      let spo = Math.floor(Math.random() * (100 - 88) + 88);
+      let temp = (36 + Math.random() * 2).toFixed(1);
+      let bp1 = Math.floor(Math.random() * (140 - 100) + 100);
+      let bp2 = Math.floor(Math.random() * (95 - 60) + 60);
+
+      document.getElementById("hrValue").innerText = hr + " bpm";
+      document.getElementById("spoValue").innerText = spo + " %";
+      document.getElementById("tempValue").innerText = temp + " °C";
+      document.getElementById("bpValue").innerText = bp1 + "/" + bp2;
+
+      // Status indicators
+      document.getElementById("hrStatus").className = "status " + (hr < 60 || hr > 100 ? "warn" : "good");
+      document.getElementById("spoStatus").className = "status " + (spo < 92 ? "danger" : "good");
+      document.getElementById("tempStatus").className = "status " + (temp > 37.5 ? "warn" : "good");
+      document.getElementById("bpStatus").className = "status good";
+      
+      document.getElementById("hrStatus").innerText = hr < 60 || hr > 100 ? "Abnormal" : "Normal";
+      document.getElementById("spoStatus").innerText = spo < 92 ? "Critical" : "Normal";
+      document.getElementById("tempStatus").innerText = temp > 37.5 ? "Fever" : "Normal";
+      document.getElementById("bpStatus").innerText = "Normal";
+
+    }
+
+    // Update every 2 seconds
+    setInterval(updateVitals, 2000);
+    updateVitals();
+  </script>
+
+</body>
 </html>
