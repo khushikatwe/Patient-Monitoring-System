@@ -20,7 +20,5 @@ Hospitals struggle with continuous real-time monitoring of patients, especially 
 - Alert and notification system
 - Dashboard/mobile interface
 
-## 📌 Demo / Website Link
-(Add link here if available)
 
 ## Update: Added output screenshot to /images folder
