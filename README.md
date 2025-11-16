@@ -1,6 +1,9 @@
 # Patient Monitoring System
 
 An IoT-based Patient Monitoring System that tracks real-time vitals like heart rate, temperature, and oxygen levels. Alerts are triggered when readings cross safe limits. Built for AI Application Development.
+## LIVE DEMO
+https://surf-chill-33285139.figma.site/
+
 
 ## 📌 Features
 - Real-time health monitoring
