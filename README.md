@@ -19,3 +19,4 @@ Hospitals struggle with continuous real-time monitoring of patients, especially 
 
 ## 📌 Demo / Website Link
 (Add link here if available)
+## Update: Added output screenshot to /images folder
